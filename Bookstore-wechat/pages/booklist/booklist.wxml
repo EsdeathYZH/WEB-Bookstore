@@ -1,0 +1,17 @@
+<!--pages/booklist/booklist.wxml-->
+<block wx:for="{{books}}" wx:key="book">
+<view class="book">
+  <!--分界线line-->
+  <view class="divide-line"></view>
+  <view class='book-item'>
+    <image src="{{item.imagePath}}" class="pic" mode="aspectFit"></image>
+    <view class="book-info">
+      <text class="title">{{item.bookname}}</text>
+      <text class="author">{{item.author}} 著</text>
+      <text class="price">¥{{item.price}}</text>
+      <text class="sale">月销{{item.saleAmount}}本 库存{{item.amount}}本</text>
+    </view>
+    <image src='../../images/shop.png' class="cart" data-idx="{{index}}" data-id="{{item.id}}" bindtap='addcart'></image>
+  </view>
+</view>
+</block>

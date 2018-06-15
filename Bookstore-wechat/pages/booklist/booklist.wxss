@@ -1,0 +1,54 @@
+/* pages/booklist/booklist.wxss */
+
+.book-item{
+  margin:7px 0px 17px 0px;
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+}
+.book-item .pic{
+  padding: 5px 6px 5px 6px;
+  height: 120px;
+  width:  100px;
+}
+
+.book-item .book-info{
+  width:160px;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-item .book-info .title{
+  height: 30px;
+  padding: 15px 0px 0px 0px;
+}
+.book-item .book-info .author{
+  font-size: 14px;
+  color:gray;
+  height: 30px;
+  padding: 5px 0px 0px 0px;
+}
+
+.book-item .book-info .price{
+  height: 30px;
+  font-size: 14px;
+  padding: 12px 0px 0px 0px;
+  color: red;
+}
+
+.book-item .book-info .sale{
+  height: 30px;
+  font-size: 12px;
+  color: #bfbfbf;
+}
+
+.book-item .cart{
+  padding: 80px 10px 0px 0px;
+  height:40px;
+  width:40px;
+}
+
+.divide-line{
+  height: 1px;
+  background-color: #bfbfbf;
+}

@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/booklist/booklist",
+    "pages/account/account",
+    "pages/shopping/shopping"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#d81e06",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "images/book-select.png",
+        "iconPath": "images/book-unselect.png",
+        "pagePath": "pages/booklist/booklist",
+        "text": "图书列表"
+      },
+      {
+        "selectedIconPath": "images/shopping-select.png",
+        "iconPath": "images/shopping-unselect.png",
+        "pagePath": "pages/shopping/shopping",
+        "text": "购物车"
+      },
+      {
+        "selectedIconPath": "images/account-select.png",
+        "iconPath": "images/account-unselect.png",
+        "pagePath": "pages/index/index",
+        "text": "我的"
+      }
+    ]
+  }
+}

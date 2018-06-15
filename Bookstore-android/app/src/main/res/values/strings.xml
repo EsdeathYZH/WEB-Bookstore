@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AndroidBookstore</string>
+    <string name="tab_name">tab_img</string>
+    <string name="sale_string">月销%1$d本    库存%2$d本</string>
+    <string name="price_string">¥ %1$f</string>
+</resources>
