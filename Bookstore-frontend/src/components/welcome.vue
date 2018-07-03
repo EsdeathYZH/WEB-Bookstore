@@ -10,16 +10,16 @@
             </ol>
 		    <div class="carousel-inner">
                 <div class="item active">
-                    <img src="/static/img/carousel1.jpg">
+                    <img src="http://localhost:8100/static/img/carousel1.jpg">
                 </div>
                 <div class="item">
-                    <img src="/static/img/carousel2.jpg" >
+                    <img src="http://localhost:8100/static/img/carousel2.jpg" >
                 </div>
                 <div class="item">
-                    <img src="/static/img/carousel3.jpg">
+                    <img src="http://localhost:8100/static/img/carousel3.jpg">
                 </div>
                 <div class="item">
-                    <img src="/static/img/carousel4.jpg">
+                    <img src="http://localhost:8100/static/img/carousel4.jpg">
                 </div>
             </div><!-- /.carousel-inner -->
             <!-- Carousel Controls -->
@@ -30,7 +30,7 @@
                 <span class="icon fa fa-chevron-right"></span>
             </a>
 	        <div class="welcome-message">
-	          <h1>欢迎来到在线书店</h1>
+	          <h1>欢迎来到Allen的书店</h1>
 	          <p>专业的图书购买平台</p>
 	        </div><!-- /.welcome-message -->
 	    </div>
@@ -40,6 +40,7 @@
 	            <li role="presentation" class="active"><a href="#recommand"  role="tab" data-toggle="tab"><span class="icon fa fa-lg fa-fire"></span> 推荐图书</a></li>
 	            <li role="presentation"><a href="#booklist"  role="tab" data-toggle="tab"><span class="icon fa fa-lg fa-search"></span> 查找书目</a></li>
               <li v-if="isManager" role="presentation"><a href="#userlist"  role="tab" data-toggle="tab"><span class="icon fa fa-lg fa-search"></span> 浏览用户</a></li>
+              <li v-if="isManager" role="presentation"><a href="#orderlist"  role="tab" data-toggle="tab"><span class="icon fa fa-lg fa-search"></span> 浏览订单</a></li>
 	        </ul>
 	        <!-- Tab panes -->
 	        <div class="tab-content tabs">
@@ -59,6 +60,9 @@
               <div v-if="isManager" role="tabpanel" class="tab-pane fade" id="userlist">
                 <UserList/>
               </div>
+              <div v-if="isManager" role="tabpanel" class="tab-pane fade" id="orderlist">
+                <OrderList/>
+              </div>
 	        </div>
 	      </div>
 	      </div>
@@ -71,6 +75,7 @@
   import BookList from './BookList'
   import BookCard from './BookCard'
   import UserList from './UserList'
+  import OrderList from './OrderList'
   export default {
     name: 'welcome',
     data () {
@@ -112,7 +117,7 @@
         }
       })
     },
-    components:{BookList,BookCard,UserList}
+    components:{BookList,BookCard,UserList,OrderList}
   }
 </script>
 

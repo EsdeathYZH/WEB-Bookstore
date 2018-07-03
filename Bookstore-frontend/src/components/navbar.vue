@@ -2,7 +2,7 @@
 	<nav role="navigation" class="navbar navbar-default navbar-fixed-top">
 	    <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.html"><em><strong>BookStore</strong></em></a>
+            <a class="navbar-brand" href="index.html"><em><strong>Allen's BookStore</strong></em></a>
           </div>
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
@@ -50,23 +50,29 @@
             <h1 class="text-center">注册</h1>
           </div>
           <div class="modal-body">
+            <form id="register_info" enctype="multipart/form-data" onsubmit="return false">
               <div class="form-group">
                 <label for="name">用户名</label>
-                <input id="name" class="form-control" v-model="registerUser.username" type="text" placeholder="6-15位字母或数字">
+                <input id="name" class="form-control" name="username" v-model="registerUser.username" type="text" placeholder="6-15位字母或数字">
               </div>
               <div class="form-group">
                 <label for="password">密码</label>
-                <input id="password" class="form-control" v-model="registerUser.password" type="password" placeholder="至少6位字母或数字">
+                <input id="password" class="form-control"  name="password" v-model="registerUser.password" type="password" placeholder="至少6位字母或数字">
               </div>
               <div class="form-group">
                 <label for="password2">再次输入密码</label>
-                <input id="password2"class="form-control" v-model="registerUser.password2" type="password" placeholder="至少6位字母或数字">
+                <input id="password2" class="form-control" v-model="registerUser.password2" type="password" placeholder="至少6位字母或数字">
+              </div>
+              <div class="form-group">
+                <label for="icon">头像</label>
+                <input id="icon" class="form-control" name="icon" type="file">
               </div>
               <div class="text-right">
                 <button class="btn btn-primary" @click="register" style="margin-top: 0px">提交</button>
                 <button class="btn btn-danger" data-dismiss="modal">取消</button>
               </div>
               <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
+            </form>
           </div>
         </div>
       </div>
@@ -85,7 +91,7 @@
             <h1 class="text-center">登录</h1>
           </div>
           <div class="modal-body">
-
+            <form id="login_info" onsubmit="return false">
               <div class="form-group">
                 <label for="log-name">用户名</label>
                 <input id="log-name" class="form-control" type="text" v-model="user.username" placeholder="">
@@ -99,7 +105,7 @@
                 <button class="btn btn-danger" data-dismiss="modal">取消</button>
               </div>
               <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">还没有账号？点我注册</a>
-
+            </form>
           </div>
         </div>
       </div>
@@ -179,8 +185,9 @@
             alert("成功注销！");
             window.location.reload();
           },
-          error:function () {
-            alert("服务器错误!");
+          error:function (data) {
+            let info = JSON.stringify(data);
+            alert(info);
           }
         });
       },
@@ -190,10 +197,13 @@
           alert("两次输入密码不一致!");
           return;
         }
+        let formData = new FormData($("#register_info")[0]);
         $.ajax({
           type:"post",
-          url:"/register",
-          data:{"username":that.registerUser.username,"password":that.registerUser.password},
+          url:"/user/register",
+          data:formData,
+          processData : false,
+          contentType: false,
           success:function(data){
             if(data==="success"){
               alert("注册成功！");
@@ -204,8 +214,9 @@
               alert(data);
             }
           },
-          error:function () {
-            alert("服务器错误!");
+          error:function (data) {
+            let info = JSON.stringify(data);
+            alert(info);
           }
         });
       }

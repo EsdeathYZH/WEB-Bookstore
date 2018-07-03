@@ -6,7 +6,7 @@
         <div class="row" id="user_message1">
           <div class="col-md-2 col-xs-12">
             <a class="thumbnail" href="#">
-              <img width="180" height="171" alt="" src="../assets/user/icon3.jpg">
+              <img width="180px" height="171px" alt="" :src="url">
             </a>
           </div>
           <div class="col-md-7 col-xs-12">
@@ -21,7 +21,7 @@
                 <label>|&nbsp;&nbsp;&nbsp;所在地:{{currentUser.city}}&nbsp;</label>
               </div>
               <div class="form-group">
-                <label>一句话介绍:{{currentUser.introduction}}&nbsp;&nbsp;  </label>
+                <label>自我介绍:{{currentUser.introduction}}&nbsp;&nbsp;  </label>
                 <input type="text"  size='50'  style="background:transparent; border:none;" >
               </div>
             </form>
@@ -30,7 +30,7 @@
             <h4>&nbsp;&nbsp;&nbsp;</h4>
             <h4>&nbsp;&nbsp;&nbsp;</h4>
             <h4>&nbsp;&nbsp;&nbsp;</h4>
-            <button class="btn btn-danger" ><span class="fa fa-edit fa-lg " aria-hidden="true"></span></button>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#profile" ><span class="fa fa-edit fa-lg " aria-hidden="true"></span></button>
           </div>
         </div>
       </div>
@@ -55,6 +55,43 @@
     </div>
     </div>
   </div>
+
+  <!--修改个人信息弹出框-->
+  <div id="profile" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" data-dismiss="modal" aria-hidden="true">
+            <span>&times;</span>
+          </button>
+          <h1 class="text-center">修改个人信息</h1>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="age">年龄</label>
+            <input id="age" class="form-control" v-model="newUser.age" type="text">
+          </div>
+          <div class="form-group">
+            <label for="school">学校</label>
+            <input id="school" class="form-control" v-model="newUser.school" type="text">
+          </div>
+          <div class="form-group">
+            <label for="city">所在地</label>
+            <input id="city"class="form-control" v-model="newUser.city" type="text">
+          </div>
+          <div class="form-group">
+            <label for="introduction">自我介绍</label>
+            <input id="introduction"class="form-control" v-model="newUser.introduction" type="text">
+          </div>
+          <div class="text-right">
+            <button class="btn btn-primary" @click="updateProfile" style="margin-top: 0px">提交</button>
+            <button class="btn btn-danger" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 </template>
 <script>
@@ -68,8 +105,41 @@
          ],
          currentUser:{
          },
+         newUser:{
+         },
        }
      },
+    methods:{
+      updateProfile:function () {
+        let that = this;
+        $.ajax({
+          type:"post",
+          url:"/user/updateProfile",
+          data:{"age":that.newUser.age,"city":that.newUser.city,"school":that.newUser.school,"introduction":that.newUser.introduction},
+          success:function(data){
+            if(data==="failed"){
+              alert("修改失败!")
+            }
+            else {
+              alert("修改成功！");
+              window.location.reload();
+            }
+          },
+          error:function (data) {
+            let info = JSON.stringify(data);
+            alert(info);
+          }
+        });
+      }
+    },
+    computed:{
+      url(){
+        if(this.currentUser.username===""){
+          return "http://localhost:8100/icon/www";
+        }
+        return "http://localhost:8100/icon/"+this.currentUser.username;
+      }
+    },
     mounted(){
       let that = this;
       $.ajax({
@@ -81,6 +151,7 @@
           }else{
             that.isLogin = true;
             that.currentUser = data;
+            that.newUser = data;
           }
         }
       });
@@ -100,6 +171,9 @@
 </script>
 
 <style scoped>
+  .modal-dialog{
+    z-index: 9999;
+  }
   #user_page{
     padding-left: 60px;
   }
